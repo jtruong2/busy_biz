@@ -19,6 +19,10 @@ RSpec.describe "Business API", type: :request do
             expect(response).to have_http_status(200)
             expect(output).to have_key("businesses")
             expect(@user.searches.count).to eq(1)
+
+            get "/api/v1/businesses?keyword=restaurants&location=denver", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+
+            expect(@user.searches.count).to eq(2)
         end
     end
 end
