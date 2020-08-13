@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :search do
-    criteria { "MyString" }
+    sequence :criteria, 10 do |n|
+      "term #{n}"
+    end
   end
 end
