@@ -2,8 +2,8 @@ class Api::V1::BusinessesController < ApplicationController
     before_action :authorized
     
     def index
-        render json: { message: "Missing required query param - location" }, status: :bad_request if !safe_params.key?("location")
-        render json: { message: "Missing required query param - location" }, status: :bad_request if !safe_params.key?("keyword")
+        render json: { message: "Missing required query param - location" }, status: :bad_request and return if !safe_params.key?("location")
+        render json: { message: "Missing required query param - keyword" }, status: :bad_request and return if !safe_params.key?("keyword")
 
         coordinates = LocationService.get_coordinates(safe_params[:location])
         business    = BusinessService.new(coordinates[0], coordinates[1])
