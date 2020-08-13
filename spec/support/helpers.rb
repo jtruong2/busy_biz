@@ -1,5 +1,5 @@
 module Helpers
-    def encode_token(payload)
-        JWT.encode(payload, ENV["jwt_secret"])
+    def get_user_by_username(username)
+        User.find_by(username: username)
     end
 end

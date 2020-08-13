@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_043303) do
+ActiveRecord::Schema.define(version: 2020_08_13_043731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 2020_08_13_043303) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_searches", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "search_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["search_id"], name: "index_user_searches_on_search_id"
+    t.index ["user_id"], name: "index_user_searches_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -28,4 +37,6 @@ ActiveRecord::Schema.define(version: 2020_08_13_043303) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "user_searches", "searches"
+  add_foreign_key "user_searches", "users"
 end
