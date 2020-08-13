@@ -30,7 +30,7 @@ class BusinessService
     end
 
     def self.is_valid_filter(filter)
-       file = File.read("#{Rails.root}/public/categories.json") 
+       file = File.read("#{Rails.root}/app/data/categories.json")
        categories = JSON.parse(file)
        return true if filter.nil?
        filter.in?(categories)

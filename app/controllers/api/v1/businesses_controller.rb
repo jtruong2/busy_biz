@@ -5,7 +5,7 @@ class Api::V1::BusinessesController < ApplicationController
         render json: { message: "Missing required query param - location" }, status: :bad_request and return if !safe_params.key?("location")
         render json: { message: "Missing required query param - keyword" }, status: :bad_request and return if !safe_params.key?("keyword")
 
-        coordinates = LocationService.get_coordinates(safe_params[:location])
+        coordinates = BusinessHelper.get_coordinates(safe_params[:location])
         business    = BusinessService.new(coordinates[0], coordinates[1])
 
         render json: { message: "Invalid sort_by term" }, status: :bad_request and return if !BusinessService.is_valid_sort(safe_params[:sort_by])
