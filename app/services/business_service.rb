@@ -23,16 +23,4 @@ class BusinessService
             nil
         end
     end
-
-    def self.is_valid_sort(sort_by)
-        return true if sort_by.nil?
-        sort_by.in?(['best_match', 'rating', 'review_count', 'distance'])
-    end
-
-    def self.is_valid_filter(filter)
-       file = File.read("#{Rails.root}/app/data/categories.json")
-       categories = JSON.parse(file)
-       return true if filter.nil?
-       filter.in?(categories)
-    end
 end
