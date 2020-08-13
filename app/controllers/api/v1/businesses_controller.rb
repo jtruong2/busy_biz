@@ -7,7 +7,10 @@ class Api::V1::BusinessesController < ApplicationController
 
         coordinates = LocationService.get_coordinates(safe_params[:location])
         business    = BusinessService.new(coordinates[0], coordinates[1])
-        resp        = business.get_businesses_by_keyword(safe_params[:keyword])
+
+        render json: { message: "Invalid sort_by term" }, status: :bad_request and return if !BusinessService.is_valid_sort(safe_params[:sort_by])
+
+        resp = business.get_businesses_by_keyword(safe_params[:keyword], safe_params[:sort_by])
         if resp
             search = Search.find_or_create_by(criteria: safe_params[:keyword])
             @user.searches << search
@@ -20,6 +23,6 @@ class Api::V1::BusinessesController < ApplicationController
     private
 
     def safe_params
-        params.permit(:keyword, :location)
+        params.permit(:keyword, :location, :sort_by)
     end
 end
