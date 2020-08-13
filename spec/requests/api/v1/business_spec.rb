@@ -17,7 +17,8 @@ RSpec.describe "Business API", type: :request do
 
 
             expect(response).to have_http_status(200)
-            expect(output).to have_key("businesses")
+            expect(output.class).to eq(Array)
+            expect(!output.empty?).to eq(true)
             expect(@user.searches.count).to eq(1)
 
             get "/api/v1/businesses?keyword=restaurants&location=denver", params: {}, headers: {"Authorization": "Bearer #{@token}"}
@@ -44,7 +45,7 @@ RSpec.describe "Business API", type: :request do
             output = JSON.parse(response.body)
 
             expect(response).to have_http_status(200)
-            expect(output["businesses"].first["distance"]).to be <= output["businesses"].last["distance"]
+            expect(output.first["distance"]).to be <= output.last["distance"]
         end
 
         it "returns error if invalid sort_by term" do
@@ -58,7 +59,7 @@ RSpec.describe "Business API", type: :request do
             output = JSON.parse(response.body)
 
             expect(response).to have_http_status(200)
-            expect(output["businesses"].first["categories"].any? {|c| c["alias"] == "waffles"}).to eq(true) 
+            expect(output.first["categories"].any? {|c| c["alias"] == "waffles"}).to eq(true) 
         end
 
         it "filters results by category" do
@@ -67,12 +68,34 @@ RSpec.describe "Business API", type: :request do
             expect(response).to have_http_status(400)
         end
 
-        # it "paginates results by page and page limit" do
-        #     get "/api/v1/businesses?keyword=restaurants&location=denver&page=2&page_limit=10", params: {}, headers: {"Authorization": "Bearer #{@token}"}
-        #     output = JSON.parse(response.body)
+        it "paginates results by page and page limit" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&page=2&page_limit=10", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
 
-        #     expect(response).to have_http_status(200)
-        #     expect(output.count).to eq(10) 
-        # end
+            expect(response).to have_http_status(200)
+            expect(output.count).to eq(10) 
+        end
+
+        it "paginates results by page and page limit" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&page=2&page_limit=10", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(200)
+            expect(output.count).to eq(10) 
+        end
+
+        it "returns error when invalid page param" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&page=1.2&page_limit=10", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(400)
+        end
+
+        it "returns error when invalid page_limit param" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&page=1&page_limit=hello", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(400)
+        end
     end
 end
