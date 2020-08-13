@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorized, except: [:create]
+  before_action :authorized, except: [:create, :show]
 
     def create
       user = User.new(safe_params)
@@ -10,6 +10,17 @@ class Api::V1::UsersController < ApplicationController
         render status: :unprocessable_entity
       end 
     end
+
+    def show
+      user = User.find_by(username: safe_params[:username])
+      if user && user.authenticate(safe_params[:password])
+        token = encode_token({user_id: user.id})
+        render json: {username: user.username, token: token}
+      else
+        render json: { message: "Invalid username or password"}, status: :unauthorized
+      end
+    end
+
   
     private
   

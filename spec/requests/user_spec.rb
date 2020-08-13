@@ -5,7 +5,7 @@ RSpec.describe "User API" do
     context "POST /api/v1/users" do
         it "creates a new user" do
             user = build(:user)
-            params = { username: user.username, password: "password" }
+            params = { username: user.username, password: user.password }
             post "/api/v1/users", params: params
             output = JSON.parse(response.body)
 
@@ -30,6 +30,27 @@ RSpec.describe "User API" do
             post "/api/v1/users", params: params
       
             expect(User.count).to eq(0)
+        end
+    end
+
+    context "GET /api/v1/users/me" do 
+        it "Gets user's jwt token" do
+            user = create(:user)
+            params = { username: user.username, password: user.password }
+            get "/api/v1/users/me", params: params
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(200)
+            expect(output['username']).to eq(user.username)
+        end
+
+        it "Gets user's jwt token fails with invalid password" do
+            user = create(:user)
+            params = { username: user.username, password: "fakepass" }
+            get "/api/v1/users/me", params: params
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(401)
         end
     end
 end
