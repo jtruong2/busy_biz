@@ -39,7 +39,7 @@ RSpec.describe "Business API", type: :request do
             expect(response).to have_http_status(400)
         end
 
-        it "searches for businesses by keyword by location and sorts results by distance" do
+        it "sorts results by distance" do
             get "/api/v1/businesses?keyword=restaurants&location=denver&sort_by=distance", params: {}, headers: {"Authorization": "Bearer #{@token}"}
             output = JSON.parse(response.body)
 
@@ -49,6 +49,20 @@ RSpec.describe "Business API", type: :request do
 
         it "returns error if invalid sort_by term" do
             get "/api/v1/businesses?keyword=restaurants&location=denver&sort_by=coolest", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+
+            expect(response).to have_http_status(400)
+        end
+
+        it "filters results by category" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&filter=waffles", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(200)
+            expect(output["businesses"].first["categories"].any? {|c| c["alias"] == "waffles"}).to eq(true) 
+        end
+
+        it "filters results by category" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&filter=notafilter", params: {}, headers: {"Authorization": "Bearer #{@token}"}
 
             expect(response).to have_http_status(400)
         end
