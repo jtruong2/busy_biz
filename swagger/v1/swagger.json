@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Busy Biz API V1",
+    "version": "v1",
+    "description": "Search for businesses across the world. Get reviews, addresss, phone numbers, and more!"
+  },
+  "components": {
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "description": "Bearer token received from POST /users",
+        "in": "header"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost:3000"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/searches": {
+      "get": {
+        "summary": "Retrieves all search terms by current user",
+        "tags": [
+          "Search"
+        ],
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Registered user's bearer token",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "searches found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "authentication failed",
+            "content": {
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Registers a user and retrieves a Bearer token",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "User created",
+            "content": {
+            }
+          },
+          "422": {
+            "description": "invalid request",
+            "content": {
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/refresh-token": {
+      "post": {
+        "summary": "Creates a new Bearer token",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Token created",
+            "content": {
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+            }
+          }
+        }
+      }
+    }
+  }
+}

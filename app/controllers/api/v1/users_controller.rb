@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authorized, except: [:create, :show]
+  before_action :authorized, except: [:create, :refresh_token]
 
     def create
       user = User.new(safe_params)
@@ -11,7 +11,7 @@ class Api::V1::UsersController < ApplicationController
       end 
     end
 
-    def show
+    def refresh_token 
       user = User.find_by(username: safe_params[:username])
       if user && user.authenticate(safe_params[:password])
         token = encode_token({user_id: user.id})
@@ -21,7 +21,6 @@ class Api::V1::UsersController < ApplicationController
       end
     end
 
-  
     private
   
     def safe_params
