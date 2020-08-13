@@ -10,11 +10,15 @@ class BusinessService
     end
 
     def get_businesses_by_keyword(keyword)
-        resp = @conn.get('businesses/search') do |req|
-            req.params['term']      = keyword
-            req.params['latitude']  = @latitude
-            req.params['longitude'] = @longitude
+        begin
+            resp = @conn.get('businesses/search') do |req|
+                req.params['term']      = keyword
+                req.params['latitude']  = @latitude
+                req.params['longitude'] = @longitude
+            end
+            JSON.parse(resp.body)
+        rescue
+            nil
         end
-        JSON.parse(resp.body)
     end
 end
