@@ -21,5 +21,11 @@ RSpec.describe "Search API", type: :request do
             expect(response).to have_http_status(200)
             expect(output.count).to eq(2)
         end
+
+        it "throws error if incorrect bearer token" do
+            get "/api/v1/searches", params: {}, headers: {"Authorization": "Bearer faketoken"}
+
+            expect(response).to have_http_status(401)
+        end
     end
 end
