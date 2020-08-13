@@ -66,5 +66,13 @@ RSpec.describe "Business API", type: :request do
 
             expect(response).to have_http_status(400)
         end
+
+        it "paginates results by page and page limit" do
+            get "/api/v1/businesses?keyword=restaurants&location=denver&page=2&page_limit=10", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+            output = JSON.parse(response.body)
+
+            expect(response).to have_http_status(200)
+            expect(output.count).to eq(10) 
+        end
     end
 end
