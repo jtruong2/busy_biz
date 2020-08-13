@@ -7,6 +7,7 @@ describe BusinessHelper do
             expect(BusinessHelper.get_coordinates("denver").count).to eq(2)
             expect(BusinessHelper.get_coordinates("Colorado").count).to eq(2)
             expect(BusinessHelper.get_coordinates("80202").count).to eq(2)
+            expect(BusinessHelper.get_coordinates("hdufkhdsfh")).to eq(nil)
         end
     end
 

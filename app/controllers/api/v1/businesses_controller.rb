@@ -7,6 +7,8 @@ class Api::V1::BusinessesController < ApplicationController
         render json: { message:  error }, status: :bad_request and return if !error.empty?
     
         coordinates = BusinessHelper.get_coordinates(formatted_params[:location])
+        render json: { message:  error }, status: :bad_request and return if coordinates.nil?
+
         business    = BusinessService.new(coordinates[0], coordinates[1])
         resp        = business.get_businesses_by_keyword(formatted_params[:keyword], formatted_params[:sort_by], formatted_params[:filter])
         if resp

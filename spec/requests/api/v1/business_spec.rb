@@ -32,6 +32,12 @@ RSpec.describe "Business API", type: :request do
             expect(response).to have_http_status(400)
         end
 
+        it "returns bad request if location is invalid" do
+            get "/api/v1/businesses?keyword=food&location=jdfsjienchfs", params: {}, headers: {"Authorization": "Bearer #{@token}"}
+
+            expect(response).to have_http_status(400)
+        end
+
         it "returns bad request if keyword is missing" do
             get "/api/v1/businesses?keyword=food", params: {}, headers: {"Authorization": "Bearer #{@token}"}
             output = JSON.parse(response.body)
