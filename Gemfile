@@ -29,6 +29,8 @@ gem 'figaro'
 gem 'faraday'
 gem 'geocoder'
 gem 'will_paginate'
+gem 'rswag-ui'
+gem 'rswag-api'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
