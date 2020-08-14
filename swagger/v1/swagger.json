@@ -157,7 +157,7 @@
   "paths": {
     "/businesses": {
       "get": {
-        "summary": "Retrieves all search terms by current user",
+        "summary": "Retrieves a list of businesses based on location and keyword",
         "tags": [
           "Search"
         ],
@@ -226,7 +226,7 @@
         ],
         "responses": {
           "200": {
-            "description": "searches found",
+            "description": "businesses found",
             "content": {
               "application/json": {
                 "schema": {
@@ -263,7 +263,7 @@
     },
     "/searches": {
       "get": {
-        "summary": "Retrieves all search terms by current user",
+        "summary": "Retrieves all keywords from a user's business search history",
         "tags": [
           "Search"
         ],
