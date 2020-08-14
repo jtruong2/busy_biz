@@ -47,5 +47,6 @@ jobs:
         RAILS_ENV: test
         JWT_SECRET: jkfdsjlkfjsd
         YELP_API_KEY: ${{ secrets.YELP_API_KEY }}
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: 
         bundle exec rspec
