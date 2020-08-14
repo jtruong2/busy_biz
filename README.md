@@ -1,3 +1,5 @@
+[![GithubActions](https://github.com/jtruong2/busy_biz/workflows/GithubActions/badge.svg)](<LINK>)
+
 # BusyBiz API
 
 BusyBiz - An API for querying, filtering, sorting, and searching business details from all around the world. 
