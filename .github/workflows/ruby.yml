@@ -45,5 +45,7 @@ jobs:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
+        JWT_SECRET: jkfdsjlkfjsd
+        YELP_API_KEY: ${{ secrets.YELP_API_KEY }}
       run: 
         bundle exec rspec

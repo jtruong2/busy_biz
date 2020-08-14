@@ -5,7 +5,7 @@ class BusinessService
         @longitude = longitude
         @conn      = Faraday.new(
             url: "https://api.yelp.com/v3",
-            headers: {"Authorization" => "Bearer #{ENV["yelp_api_key"]}"}
+            headers: {"Authorization" => "Bearer #{ENV["YELP_API_KEY"]}"}
         )
     end
 
