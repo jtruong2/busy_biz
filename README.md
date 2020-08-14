@@ -24,6 +24,7 @@ If you lost your token, no worries, call the /refresh-token endpoint to get new 
 - RSpec Testing Suite
 - Docker
 - OpenAPI Documentation
+- Github Actions CI/CD
 
 
 ## Testing
