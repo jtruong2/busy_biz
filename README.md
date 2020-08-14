@@ -23,6 +23,8 @@ If you lost your token, no worries, call the /refresh-token endpoint to get new 
 - [Geocoder](https://github.com/alexreisner/geocoder)
 - RSpec Testing Suite
 - Docker
+- OpenAPI Documentation
+
 
 ## Testing
 ![alt test](https://p63.f2.n0.cdn.getcloudapp.com/items/OAuqqNR9/Image%202020-08-13%20at%2011.20.10%20PM.png)
