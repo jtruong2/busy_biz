@@ -7,7 +7,7 @@ class Api::V1::UsersController < ApplicationController
         token = encode_token({user_id: user.id})
         render json: { username: user.username, token: token }
       else
-        render status: :unprocessable_entity
+        render json: { message: "Cannot process username and password. Username may already exist." }, status: :unprocessable_entity
       end 
     end
 

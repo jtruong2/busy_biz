@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_135119) do
+ActiveRecord::Schema.define(version: 2020_08_17_141423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_135119) do
     t.string "filter"
     t.string "page"
     t.string "page_limit"
+    t.string "location"
   end
 
   create_table "user_searches", force: :cascade do |t|

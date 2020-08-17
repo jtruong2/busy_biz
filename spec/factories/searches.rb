@@ -1,7 +1,10 @@
 FactoryBot.define do
   factory :search do
-    sequence :criteria, 10 do |n|
-      "term #{n}"
-    end
+    keyword { "MyString" }
+    filter { "MyString" }
+    sort_by { "MyString" }
+    page { "MyString" }
+    page_limit { "MyString" }
+    location { "MyString" }
   end
 end
