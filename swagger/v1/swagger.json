@@ -29,6 +29,29 @@
           }
         }
       },
+      "Search": {
+        "type": "object",
+        "properties":{
+          "keyword": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "sort_by": {
+            "type": "string"
+          },
+          "filter": {
+            "type": "string"
+          },
+          "page": {
+            "type": "string"
+          },
+          "page_limit": {
+            "type": "string"
+          }
+        }
+      },
       "Business": {
         "type": "object",
         "properties": {
@@ -280,7 +303,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Search"
                   }
                 }
               }
