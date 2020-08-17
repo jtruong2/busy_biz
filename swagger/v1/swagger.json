@@ -79,7 +79,7 @@
           "categories": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/category"
+              "$ref": "#/components/schemas/Category"
             }
           },
           "rating": {
@@ -148,7 +148,7 @@
           }
         }
       },
-      "category": {
+      "Category": {
         "type": "object",
         "properties": {
           "alias": {
