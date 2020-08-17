@@ -8,10 +8,8 @@ require 'rspec/rails'
 require 'simplecov'
 SimpleCov.start
 
-if ENV['ci'] == 'true'
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
