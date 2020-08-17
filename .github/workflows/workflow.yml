@@ -44,7 +44,7 @@ jobs:
       env:
         PGHOST: localhost
         PGUSER: postgres
-        RAILS_ENV: ci 
+        RAILS_ENV: test 
         JWT_SECRET: jkfdsjlkfjsd
         YELP_API_KEY: ${{ secrets.YELP_API_KEY }}
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
