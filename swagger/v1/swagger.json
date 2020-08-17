@@ -263,7 +263,7 @@
     },
     "/searches": {
       "get": {
-        "summary": "Retrieves all keywords from a user's business search history",
+        "summary": "Retrieves all search criteras from a user's business search history",
         "tags": [
           "Search"
         ],
