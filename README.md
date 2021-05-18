@@ -10,7 +10,7 @@ BusyBiz - An API for querying, filtering, sorting, and searching business detail
 Register as a user to get a JWT Bearer token.
 Set the token in your header when making requests to the businesses and searches endpoint\
 ``` "Authorization": "Bearer BEARER_TOKEN"```\
-If you lost your token, no worries, call the /refresh-token endpoint to get new one.
+If you lost your token, no worries, call the /refresh-token endpoint to get a new one.
 
 ### API Endpoints
 
